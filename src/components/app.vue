@@ -259,6 +259,7 @@ function subscribe(event) {
           Terra Nova
         </a>
 
+
         <div class="socials">
           <a href="#">Facebook</a>
           <a href="#">Instagram</a>
