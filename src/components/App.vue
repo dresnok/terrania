@@ -13,22 +13,22 @@ const initiatives = [
 const problems = [
   {
     title: "Zanieczyszczenie oceanów",
-    image: "/assets/hero-landscape.png",
+    image: "assets/hero-landscape.png",
     label: "Woda",
   },
   {
     title: "Topnienie lodowców",
-    image: "/assets/glacier.png",
+    image: "assets/glacier.png",
     label: "Klimat",
   },
   {
     title: "Utrata lasów",
-    image: "/assets/forest.png",
+    image: "assets/forest.png",
     label: "Natura",
   },
   {
     title: "Emisje gazów",
-    image: "/assets/hero-landscape.png",
+    image: "assets/hero-landscape.png",
     label: "Powietrze",
   },
 ];
