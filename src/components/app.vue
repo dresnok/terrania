@@ -1,158 +1,271 @@
 <script setup>
+import { ref } from "vue";
 
+const message = ref("");
 
+const initiatives = [
+  ["Sadzenie drzew", "zieleń i klimat", "12/03/26"],
+  ["Sprzątanie plaż", "dla przyszłych pokoleń", "29/05/26"],
+  ["Edukacja ekologiczna", "warsztaty", "06/06/26"],
+  ["Ochrona miejskich parków", "lokalne działania", "18/08/26"],
+];
 
-const articles = [
+const problems = [
   {
-    title: "Surreal Portrait: Exploring Isolation By Ben Zank",
-    meta: "Photography / Concept",
-    image: "head/photo-1500648767791-00dcc994a43e.avif",
+    title: "Zanieczyszczenie oceanów",
+    image: "/assets/hero-landscape.png",
+    label: "Woda",
   },
   {
-    title: "The Art Of Waiting By Ignant Production",
-    meta: "Art / Conceptual",
-    image: "head/photo-1506794778202-cad84cf45f1d.avif",
+    title: "Topnienie lodowców",
+    image: "/assets/glacier.png",
+    label: "Klimat",
   },
   {
-    title: "Time Is Defined As The Indefinite Continued Progress",
-    meta: "Photography / Concept",
-    image: "head/photo-1507003211169-0a1dd7228f2d.avif",
+    title: "Utrata lasów",
+    image: "/assets/forest.png",
+    label: "Natura",
   },
-]
+  {
+    title: "Emisje gazów",
+    image: "/assets/hero-landscape.png",
+    label: "Powietrze",
+  },
+];
 
-const topStories = [
-  { number: "1.", title: "The Understated Charm of Jack", category: "Johnstones / Photography" },
-  { number: "2.", title: "Photographer Drew Vickers Shoots", category: "The Spectrum Of Emotion" },
-  { number: "3.", title: "The Understated Charm of Jack", category: "Johnstones / Photography" },
-]
+function problemBackground(image) {
+  return {
+    backgroundImage: `linear-gradient(180deg, transparent 24%, rgba(5, 18, 16, 0.78) 100%), url("${image}")`,
+  };
+}
 
-const menu = ["Home", "About us", "Art", "Blog", "Articles", "News", "Pinterest", "Gallery", "Contact"]
+function subscribe(event) {
+  message.value = "Dziękujemy! Jesteś na liście.";
+  event.currentTarget.reset();
+}
 </script>
 
 <template>
-  <main class="page-shell">
-    <section class="magazine">
-      <aside class="sidebar">
-        <a class="brand" href="#">TETRAD</a>
+  <main class="site-shell">
+    <div class="page">
+      <header class="topbar">
+        <a
+          class="brand brand-mobile"
+          href="#start"
+          aria-label="Terra Nova — strona główna"
+        >
+          <span class="brand-mark">✣</span>
+          Terra Nova
+        </a>
 
-        <nav class="main-nav" aria-label="Główna nawigacja">
-          <a v-for="item in menu" :key="item" href="#">{{ item }}</a>
+        <nav class="nav nav-left" aria-label="Główna nawigacja">
+          <a class="active" href="#start">Start</a>
+          <a href="#dzialania">Działania</a>
+          <a href="#misja">Nasza misja</a>
         </nav>
 
-        <div class="social-block">
-          <span>Follow us on social media</span>
-          <div class="social-links">
-            <a href="#" aria-label="Facebook">f</a>
-            <a href="#" aria-label="Twitter">♥</a>
-            <a href="#" aria-label="Pinterest">p</a>
+        <a class="brand brand-desktop" href="#start">
+          <span class="brand-mark">✣</span>
+          Terra Nova
+        </a>
+
+        <nav class="nav nav-right" aria-label="Dodatkowa nawigacja">
+          <a href="#problemy">Problemy</a>
+          <a href="#projekty">Projekty</a>
+          <a class="contact-link" href="mailto:kontakt@terranova.pl">Kontakt</a>
+        </nav>
+
+        <details class="mobile-menu">
+          <summary aria-label="Otwórz menu">
+            <span></span>
+            <span></span>
+          </summary>
+          <div>
+            <a href="#misja">Nasza misja</a>
+            <a href="#dzialania">Działania</a>
+            <a href="#problemy">Problemy</a>
+            <a href="mailto:kontakt@terranova.pl">Kontakt</a>
+          </div>
+        </details>
+      </header>
+
+      <section id="start" class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span>✣</span> Fundacja Terra Nova</p>
+          <h1>
+            Ratujmy naturę.<br />
+            Zmieniajmy <u>klimat</u><br />
+            razem.
+          </h1>
+
+          <form class="hero-form" @submit.prevent="subscribe">
+            <label class="sr-only" for="hero-email">Adres e-mail</label>
+            <input
+              id="hero-email"
+              type="email"
+              required
+              placeholder="Twój adres e-mail"
+            />
+            <button type="submit">Dołącz <span>→</span></button>
+          </form>
+
+          <div class="community">
+            <div class="avatars" aria-hidden="true">
+              <i>AK</i><i>MJ</i><i>OL</i>
+            </div>
+            <p><strong>1,7 mln+</strong> osób<br />działa razem z nami</p>
           </div>
         </div>
-      </aside>
 
-      <div class="content">
-        <header class="top-stories">
-          <article v-for="story in topStories" :key="story.number" class="top-story">
-            <strong>{{ story.number }}</strong>
-            <div>
-              <h2>{{ story.title }}</h2>
-              <p>{{ story.category }}</p>
-              <small>08.03.2026</small>
-            </div>
-          </article>
-        </header>
+        <div class="hero-visual">
+          <span class="hotspot hotspot-one">○ Emisje CO₂</span>
+          <span class="hotspot hotspot-two">○ Zanieczyszczenie wód</span>
+          <span class="hotspot hotspot-three">○ Utrata bioróżnorodności</span>
 
-        <section class="latest">
-          <div class="section-heading">
-            <h1>LATEST ARTICLES</h1>
-            <span>12 956 article</span>
+          <div class="volunteer-card">
+            <span>17</span>
+            <p>lat wspólnych<br />działań</p>
           </div>
 
-          <div class="cards">
-            <article v-for="article in articles" :key="article.title" class="article-card">
-              <div class="card-copy">
-                <h3>{{ article.title }}</h3>
-                <p>{{ article.meta }}</p>
-              </div>
-              <img :src="article.image" :alt="article.title" />
-            </article>
-          </div>
-        </section>
+          <p class="visual-note">
+            Chronimy środowisko<br />i odbudowujemy naturę.
+          </p>
+        </div>
+      </section>
 
-        <footer class="feature-footer">
-          <div class="footer-title">
-            <h3>The Understated Charm of Jack</h3>
-            <span>Johnstones / Photography</span>
-          </div>
+      <section id="misja" class="mission">
+        <div class="orbit-photo orbit-one"></div>
 
-          <p class="footer-text">
-            American photographer Ben Zank, who we featured previously, shares
-            a new series of surreal portraits following his move from New York
-            City to New Zealand. His images represent an ongoing experience of
-            isolation and discovery.
+        <div class="mission-copy">
+          <p class="section-kicker">Nasza wspólna przyszłość</p>
+          <h2>Zróbmy świat<br />czystszym i bardziej zielonym.</h2>
+          <p>
+            Łączymy ludzi, naukę i lokalne społeczności, aby odwracać skutki
+            zmian klimatu.
           </p>
 
-          <div class="recommend">
-            <em>Recommended For You</em>
-            <div class="share-box">
-              <span>231</span>
-              <button>f</button>
-              <button>♥</button>
-              <button>p</button>
+          <div class="mission-actions">
+            <a class="button-light" href="#projekty">
+              Zobacz projekty <span>→</span>
+            </a>
+            <a class="text-link" href="#dzialania">
+              <i></i> Dowiedz się więcej
+            </a>
+          </div>
+        </div>
+
+        <div class="orbit-photo orbit-two"></div>
+        <div class="orbit-photo orbit-three"></div>
+      </section>
+
+      <section class="statement" aria-label="Chronimy naturę">
+        <div class="statement-word dark">My</div>
+        <div class="statement-word photo glacier-small">Chronimy</div>
+        <div class="statement-arrow" aria-hidden="true">→</div>
+        <div class="statement-word photo earth-small">Naturę</div>
+      </section>
+
+      <section id="dzialania" class="initiatives">
+        <div class="section-heading">
+          <h2>Nasze inicjatywy</h2>
+          <p>
+            Poznaj projekty, dzięki którym<br />natura odzyskuje równowagę.
+          </p>
+        </div>
+
+        <div class="initiative-head">
+          <span>Nazwa</span>
+          <span>Obszar</span>
+          <span>Data</span>
+          <span></span>
+        </div>
+
+        <div class="initiative-list">
+          <a
+            v-for="([title, tag, date], index) in initiatives"
+            :key="title"
+            href="#projekty"
+            class="initiative-row"
+          >
+            <strong>{{ title }}</strong>
+            <span :class="['tag', { accent: index === 1 }]">{{ tag }}</span>
+            <time>{{ date }}</time>
+            <i>→</i>
+          </a>
+        </div>
+      </section>
+
+      <section id="problemy" class="problems">
+        <div class="problem-grid">
+          <article
+            v-for="(problem, index) in problems"
+            :key="problem.title"
+            :class="['problem-card', `card-${index + 1}`]"
+            :style="problemBackground(problem.image)"
+          >
+            <span class="card-label">{{ problem.label }}</span>
+
+            <a
+              class="card-arrow"
+              href="#projekty"
+              :aria-label="`Poznaj: ${problem.title}`"
+            >
+              <span aria-hidden="true">↗</span>
+            </a>
+
+            <div class="card-copy">
+              <h3>{{ problem.title }}</h3>
+              <p>
+                Małe decyzje budują wielką zmianę. Zobacz, jak możesz pomóc.
+              </p>
             </div>
-          </div>
-        </footer>
-      </div>
 
-      <aside class="right-panel">
-        <article class="featured">
-          <img
-            src="head/photo-1487958449943-2429e8be8625.avif"
-            alt="Modernistyczny budynek"
-          />
-          <div class="featured-copy">
-            <h2>Techeles Reopens Its Doors For A Visually Stimulating Cinematic Experience</h2>
-            <span>08.03.2026</span>
-            <p>
-              An impressive treatment to Berlin's past, present era, the former
-              iconic Kunsthaus Tacheles in the Berlin district of Mitte.
-            </p>
-          </div>
-        </article>
+            <a class="card-button" href="#projekty">
+              Poznaj problem <span>→</span>
+            </a>
+          </article>
+        </div>
+      </section>
 
-        <form class="subscribe" @submit.prevent>
-          <h3>Subscribe Now</h3>
+      <section id="projekty" class="newsletter">
+        <span class="pill">newsletter</span>
 
-          <label>
-            <span>Name</span>
-            <input type="text" />
-          </label>
+        <div>
+          <h2>
+            Otrzymuj najnowsze informacje<br />o naszych projektach i
+            inicjatywach.
+          </h2>
 
-          <div class="split-fields">
-            <label>
-              <span>Email</span>
-              <input type="email" />
-            </label>
-            <label>
-              <span>Mobile</span>
-              <input type="tel" />
-            </label>
-          </div>
+          <form @submit.prevent="subscribe">
+            <label class="sr-only" for="footer-email">Adres e-mail</label>
+            <input
+              id="footer-email"
+              type="email"
+              required
+              placeholder="Adres e-mail"
+            />
+            <button type="submit">Zapisz się <span>→</span></button>
+          </form>
 
-          <label>
-            <span>Info</span>
-            <input type="text" />
-          </label>
+          <p class="form-message" aria-live="polite">{{ message }}</p>
+        </div>
+      </section>
 
-          <label>
-            <span>Subject</span>
-            <input type="text" />
-          </label>
+      <footer>
+        <p>©2026 Terra Nova. Wszelkie prawa zastrzeżone.</p>
 
-          <button type="submit">SEND</button>
-        </form>
+        <a class="brand" href="#start">
+          <span class="brand-mark">✣</span>
+          Terra Nova
+        </a>
 
-        <div class="copyright">ALL RIGHTS RESERVED</div>
-      </aside>
-    </section>
+
+        <div class="socials">
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </footer>
+    </div>
   </main>
 </template>
